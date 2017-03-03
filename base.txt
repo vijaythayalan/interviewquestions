@@ -1,0 +1,699 @@
+Why we need to use JAVA
+
+1. Java is easy to learn.
+Java was designed to be easy to use and is therefore easy to write, compile, debug, and learn than other programming languages.
+
+2. Java is object-oriented.
+This allows you to create modular programs and reusable code. modular, flexible and extensible
+
+3. Java is platform-independent.
+One of the most significant advantages of Java is its ability to move easily from one computer system to another. The ability to run the same program on many different systems is crucial to World Wide Web software, and Java succeeds at this by being platform-independent at both the source and binary levels.
+
+4. Java has Rich API
+Java provides API for I/O, networking, utilities, XML parsing, database connection, and almost everything
+
+5. Powerful development tools e.g. Eclipse , Netbeans
+
+6. Great collection of Open Source libraries/frameworks and online supports
+There are framework like Spring, Struts, Maven.
+
+Design patterns and active community support. One of the good one is StackOverflow.
+
+7. Java is FREE
+
+8. Excellent documentation support - Javadocs
+
+Disadvantages:
+
+Managing Memory: The reason that why Java is much simpler than C++ is because Java uses automatic memory allocation and garbage collection where else C++ requires the programmer to allocate memory and to collect garbage.
+
+==============================================================================================================
+J2SE 5 Features -- Code named Tiger and released on September 30, 2004.
+	For-each loop 				Varargs  		Static Import   			Autoboxing and Unboxing 	 
+	Covariant Return Type 		Enum  			Annotation (Meta data)		Generics
+
+JavaSE 6 Features -- Code named Mustang and released on December 11, 2006.
+	Instrumentation (premain method) 
+
+JavaSE 7 Features -- Code named Dolphin and released on July 28, 2011.
+	Caching Multiple Exceptions by single catch		Binary Literals 		The try-with-resources 
+	Underscores in Numeric Literals					Diamond Syntax			String in switch statement			
+	Support for Dynamic Languages
+
+Java 8 was released on 18 March 2014. - The code name culture is dropped with Java 8
+	Lambda Expressions			Pipelines and Streams			Date and Time API
+	Default Methods 			Type Annotations				PermGen Error Removed
+
+
+================================================================================================================
+1. What is difference between path and classpath variables?
+	PATH is an environment variable used by operating system to locate the executables. That’s why when we install Java or want any executable to be found by OS, we need to add the directory location in the PATH variable. 
+	Classpath is specific to java and used by java executables to locate class files. We can provide the classpath location while running java application and it can be a directory, ZIP files, JAR files etc.
+
+
+2.What is overloading and overriding in java?
+	When we have more than one method with same name in a single class but the arguments are different or if the return type is different, then it is called as method overloading.
+	Overriding concept comes in picture with inheritance when we have two methods with same signature, one in parent class and another in child class. We can use @Override annotation in the child class overridden method to make sure if parent class method is changed, so as child class.
+	
+
+3.What is final, finally and finalize in java?
+	final:(keyword)
+		final is a keyword. The variable decleared as final should be initialized only once and cannot be changed. Java classes declared as final cannot be extended. Methods declared as final	cannot be overridden. final keyword is used with Class to make sure no other class can extend it, for example String class is final and we can’t extend it. We can use final keyword with methods to make sure child classes can’t override it. final keyword can be used with variables to make sure that it can be assigned only once. However the state of the variable can be changed, for example we can assign a final variable to an object only once but the object variables can change later on.
+	finally: (block)
+		fianlly block is used with try-catch to put the code that you want to get executed always, even if any exception is thrown by the try-catch block. finally block is mostly used to release resources created in the try block. Putting cleanup code in a finally block is always a good practice, even when no exceptions are anticipated.
+	finalize: (method)	protected void finalize() throws Throwable { };
+		finalize() is a special method in Object class that we can override in our classes. This method get’s called by garbage collector when the object is getting garbage collected. This method is usually overridden to release system resources when object is garbage collected.
+	
+
+4.What is the difference between fail-fast and fail-safe Iterators?
+	Fail-fast Iterators throws ConcurrentModificationException when one Thread is iterating over collection object and other thread structurally modify Collection either by adding, removing or modifying objects on underlying collection. They are called fail-fast because they try to immediately throw Exception when they encounter failure. On the other hand fail-safe Iterators works on copy of collection instead of original collection. Examples would include iterators returned by ConcurrentHashMap or CopyOnWriteArrayList.
+	
+
+5.What is CopyOnWriteArrayList, how it is different than ArrayList and Vector?
+	CopyOnWriteArrayList is new List implementation introduced in Java 1.5 that provides better concurrent access than Synchronized List. Better concurrency is achieved by Copying ArrayList over each write and replace with original instead of locking. CopyOnWriteArrayList doesn’t throw any ConcurrentModification Exception. Its different than ArrayList because its thread-safe and ArrayList is not thread safe and its different than Vector in terms of Concurrency. This provides better Concurrency by reducing contention among readers and writers.	
+	
+	
+6.Explain different ways of creating a thread.
+	a)By extending the Tread class
+		class Multi extends Thread{  
+			public void run(){  
+				System.out.println("thread is running...");  
+			}  
+			public static void main(String args[]){  
+				Multi t1=new Multi();  							Output:thread is running...
+				t1.start();  
+			}  
+		}  
+	Thread class constructor allocates a new thread object. When you create object of Multi class, your class constructor is invoked(provided by Compiler) fromwhere Thread class constructor is invoked(by super() as first statement).So your Multi class object is thread object now. Thead Class implements Runnable
+	
+	b)By implementing the Runnable interface:
+		class Multi3 implements Runnable{  
+			public void run(){  
+				System.out.println("thread is running...");  
+			}  
+		  
+			public static void main(String args[]){  
+				Multi3 m1=new Multi3();  
+				Thread t1 =new Thread(m1);  					Output:thread is running...
+				t1.start();  
+			}  
+		}  
+When not extending the Thread class, class object would not be treated as a thread object.So create Thread class object explicitely. Passing the object of our class that implements Runnable so that run() method may execute.
+
+	c) An application can use the Executor framework, in order to create a thread pool.
+		The Runnable interface is preferred, as it does not require an object to inherit the Thread class. In case if application design requires multiple inheritance, only interfaces can help. Also, the thread pool is very efficient and can be implemented and used very easily.
+
+
+7.Singleton Design pattern:	
+	There should be only one instance allowed for a class (make the constructor private)
+	We should allow global point of access to that single instance.	(make the instance method static)
+		
+	public class Singleton {
+		private static Singleton singleInstance;
+		private Singleton() {}
+		public static Singleton getSingleInstance() { //lazy loading
+			if (singleInstance == null) {
+				synchronized (Singleton.class) {
+					if (singleInstance == null) {
+						singleInstance = new Singleton();
+					}
+				}
+			}
+			return singleInstance;
+		}
+If you don’t synchronize the method which is going to return the instance then, there is a possibility of allowing multiple instances in a multi-threaded scenario.
+
+	public class Singleton {
+		private static Singleton singleInstance = new Singleton();	//early loading
+		private Singleton() {}
+		public static Singleton getSingleInstance() {
+			return singleInstance;
+		}
+	}
+Usage of Singleton Pattern in Java API:- java.lang.Runtime#getRuntime() and java.awt.Desktop#getDesktop()
+
+	
+8.What differences exist between Iterator and ListIterator ? 
+	An Iterator can be used to traverse the Set and List collections, while the ListIterator can be used to iterate only over Lists.
+	The Iterator can traverse a collection only in forward direction, while the ListIterator can traverse a List in both directions.
+	The ListIterator implements the Iterator interface and contains extra functionality, such as adding an element, replacing an element, getting the index position for previous and next elements, etc.
+
+
+9.Autoboxing: 
+	The Java compiler brings about an automatic transformation of primitive type (int, float, double etc.) into their object equivalents or wrapper type (Integer, Float, Double,etc) for the ease of compilation.
+Unboxing:- The automatic transformation of wrapper types into their primitive equivalent is known as Unboxing.
+	
+	
+10.Exceptions and Error:
+	Errors (members of the Error family) are usually thrown for more serious problems, such as OutOfMemoryError (OOM), that may not be so easy to handle.
+	An Unchecked Exception inherits from RuntimeException (which extends from Exception). The JVM treats RuntimeException differently as there is no requirement for the application-code to deal with them explicitly.
+Un-Checked Exception Classes:-ArithmeticException, ArrayIndexOutOfBoundsException, NoSuchFieldException,  StringIndexOutOfBoundsException, NumberFormateException, NullPointerException, NoSuchMethodException
+	A Checked Exception inherits from the Exception-class. The client code has to handle the checked exceptions either in a try-catch clause or has to be thrown for the Super class to catch the same. A Checked Exception thrown by a lower class (sub-class) enforces a contract on the invoking class (super-class) to catch or throw it.
+Checked Exception Classes:-	FileNotFoundException, ClassNotFoundException, IOException, InterruptedException, 
+	
+		
+11.Catching Multiple Exceptions in Java 7:
+	In Java 7 it was made possible to catch multiple different exceptions in the same catch block. This is also known as multi catch.
+
+Before Java 7 you would write something like this:
+			try { // execute code that may throw 1 of the 2 exceptions below.
+			} catch(SQLException e) {
+				logger.log(e);
+			} catch(IOException e) {
+				logger.log(e);
+			}
+
+From Java 7
+			try {
+			} catch(SQLException | IOException ex) { //execute code that may throw 1 of the 2 exceptions below.
+				logger.log(ex);
+			}
+
+	Two exception class names in the first catch block are separated by the pipe character |. The pipe character between exception class names is to declare multiple exceptions to be caught by the same catch clause. If a catch block handles more than one exception type, then the catch parameter is implicitly final. Here the catch parameter ex is final and therefore we cannot assign any values to it within the catch block. If all the exceptions belong to the same class hierarchy, we can catch that (the base exception type). The only other way is to catch each exception in their own catch block. 
+	
+	Example:-
+		catch(RuntimeException | ArithmeticException ex) - reversal is also not possible.
+			This is not possible. compile time error thrown is :The exception ArithmeticException(subclass of runtime exception) is already caught by the alternative RuntimeException. Multiple catch can fix this. 
+
+	
+12.What differences exist between HashMap and Hashtable ? 
+	A Hashtable is an array of list.Each list is known as a bucket.The position of bucket is identified by calling the hashcode() method. A Hashtable contains values based on the key. It implements the Map interface and extends Dictionary class.
+	A HashMap contains values based on the key. It implements the Map interface and extends AbstractMap class.
+	HashMap allows one null key and multiple null values but, Hashtable doesn't allow any null key or value.
+	HashMap is non synchronized. It is not-thread safe and can't be shared between many threads without proper synchronization code. Make the HashMap as synchronized by Map m = Collections.synchronizedMap(hashMap);
+	HashMap is traversed by Iterator. Hashtable is traversed by Enumerator and Iterator.
+	A HashMap provides its set of keys and a Java application can iterate over them. Thus, a HashMap is fail-fast simply, Iterator in HashMap is fail-fast.	Enumerator in Hashtable is not fail-fast
+	HashMap is a new class introduced in JDK 1.2. Hashtable is a legacy class.	
+	
+	
+13.How does finally block differ from finalize() method ? 
+	A finally block will be executed whether or not an exception is thrown and is used to release those resources held by the application. Finalize is a protected method of the Object class, which is called by the Java Virtual Machine (JVM) just before an object is garbage collected.	
+	
+
+14.Diamond operator in java
+	Map<String, List<Trade>> trades = new TreeMap<String, List<Trade>> ();
+	Can the compiler infer the types by looking at the left-hand-side declaration?
+		Not unless you’re using Java 7. In 7, it’s written like this:
+			Map<String, List<Trade>> trades = new TreeMap <> ();
+			Instead you use the <> symbol, which is called diamond operator.
+		
+
+15.How you can force the garbage collection?
+	Garbage collection automatic process and can't be forced. You could request it by calling System.gc(). JVM does not guarantee that GC will be started immediately.
+	Garbage collection is one of the most important feature of Java, Garbage collection is also called automatic memory management as JVM automatically removes the unused variables/objects (value is null) from the memory. User program can't directly free the object from memory, instead it is the job of the garbage collector to automatically free the objects that are no longer referenced by a program. Every class inherits finalize() method from java.lang.Object, the finalize() method is called by garbage collector when it determines no more references to the object exists. In Java, it is good idea to explicitly assign null into a variable when no more in use. Java on calling System.gc() and Runtime.gc(), JVM tries to recycle the unused objects, but there is no guarantee when all the objects will garbage collected.
+	
+	
+16.When finally block is NOT called in following conditions?
+	If the JVM exits while the try or catch code is being executed, then the finally block may not execute. This may happen due to System.exit() call.
+	If the thread executing the try or catch code is interrupted or killed, the finally block may not execute.
+	If exception is thrown in finally block & not handled then remaining code in finally block may not be executed.
+	
+	
+17. varargs:
+	The varargs allows the method to accept zero or multiple arguments.
+	If we don't know how many argument we will have to pass in the method, varargs is the better approach.
+	The varargs uses ellipsis i.e. three dots after the data type. 
+		return_type method_name(data_type... variableName){} 
+
+		Rules for varargs:
+			1. There can be only one variable argument in the method.
+			2. Variable argument (varargs) must be the last argument.
+					void method(String... a, int... b){}//Compile time error 
+					void method(int... a, String b){}//Compile time error 
+					void method(int num, String... values) // correct syntax
+
+		Example:
+			class VarargsExample3{ 
+				    static void display(int num, String... values){ 
+				        for(String s:values){ 
+				            System.out.print(s + ","); 
+				        } 
+				    } 
+					public static void main(String args[]){ 
+						display(500,"hello");//one argument  
+						display(1000,"my","name","is","varargs"); //four arguments 
+					}  
+			} 
+		Output: 500,hello,1000,my,name,is,varargs,
+
+
+21. Java - Variable Types
+	Local Variable:-
+		A variable that is declared inside the method,constructors, or blocks.
+		Access modifiers cannot be used for local variables.(only final allowed, no static or public is allowed).
+		There is no default value for local variables.
+		local variables should be declared and an initial value should be assigned before the first use.
+	Instance Variable:-
+		A variable that is declared inside the class but outside the method,constructor or any block. 
+		It is not declared as static.
+		Access modifiers can be given for instance variables. Instance variables have default values. 
+	Static variable:-
+		A variable that is declared as static is called static variable. 
+		It cannot be local(even inside a static method or block, we cannot have a static variable).
+		Default values are same as instance variables
+
+		
+22.UnsupportedOperationException:
+	This exception is thrown on invoked methods which are not supported by actual collection type.
+For example, if you make a read-only list list using “Collections.unmodifiableList(list)” and then call add() or remove() method, what should happen. It should clearly throw UnsupportedOperationException
+
+	
+26.What are differences among throw, throws, and Throwable?
+	In Java, all error's and execption's class are drieved from java.lang.Throwable class. It is the top of the hierarchy of classes of error and exceptions. Only objects that are instances of this class (or one of its subclasses) are thrown by the Java Virtual Machine or can be thrown by the Java throw statement.
+	throws is a post-method modifier and specifies which execptions may be thrown by the method. If they are checked exceptions, the compiler will guarantee the code invoking that method must catch these checked exceptions.
+	throw statement is used to throw an error or exceptions. throw statement requires a single argument: a instance of any subclass of the Throwable class or Throwable class. Executing throw statement triggers the JVM to throw this exception and causes an exception to occur.
+		class MyException extends Throwable	{
+	        //Customized Exception class
+		}
+
+		class ThrowAndThrowsExample {
+			void method() throws MyException{
+				MyException e = new MyException();
+				throw e;
+			}
+		}
+	
+	
+27.What is the difference between Set, List and Map Collection classes?
+	java.util.Set, java.util.List and java.util.Map are popular data structure support in Java. 	
+	Set provides uniqueness guarantee i.e.g you cannot store duplicate elements on it, but it’s not ordered. 
+	List is an ordered Collection and also allowes duplicates. 
+	Map is based on hashing and stores key and value in an Object called entry. It provides O(1) performance to get object, if you know keys, if there is no collision. 
+	Popular impelmentation of Set is HashSet, of List is ArrayList and LinkedList, and of Map are HashMap, Hashtable and ConcurrentHashMap. 
+Another key difference between Set, List and Map are that Map doesn’t implement Collection interface, while other two does.
+
+
+28.Java swing:
+	Swing is a part of Java Foundation classes (JFC), the other parts of JFC are java2D and Abstract window toolkit (AWT). AWT, Swing & Java 2D are used for building graphical user interfaces (GUIs) in java. Unlike AWT, Java Swing provides platform-independent and lightweight components. The javax.swing package provides classes for java swing API such as JButton, JTextField, JTextArea, JRadioButton, JCheckbox, JMenu, JColorChooser etc. Swing supports pluggable look and feel. Swing follows MVC.
+	
+	
+29.What is an Event?
+	Change in the state of an object is known as event i.e. event describes the change in state of source. Events are generated as result of user interaction with the graphical user interface components. For example, clicking on a button, moving the mouse, entering a character through keyboard,selecting an item from list, scrolling the page are the activities that causes an event to happen.
+
+	
+30.Types of Event
+	Foreground Events - Those events which require the direct interaction of user.They are generated as consequences of a person interacting with the graphical components in Graphical User Interface. For example, clicking on a button, moving the mouse, entering a character through keyboard,selecting an item from list, scrolling the page etc.
+	Background Events - Those events that require the interaction of end user are known as background events. Operating system interrupts, hardware or software failure, timer expires, an operation completion are the example of background events.
+
+	
+31.Difference between lightweight and heavyweight component?
+	Lightweight components reuses its parents graphical units. Heavyweight components goes with the native graphical unit for every component. Lightweight components are faster than the heavyweight components.
+
+
+32.Object level locking and class level locking?
+	Object level locking is mechanism when you want to synchronize a non-static method or non-static code block such that only one thread will be able to execute the code block on given instance of the class. This should always be done to make instance level data thread safe.
+	Class level locking prevents multiple threads to enter in synchronized block in any of all available instances on runtime. This means if in runtime there are 100 instances of DemoClass, then only one thread will be able to execute demoMethod() in any one of instance at a time, and all other instances will be locked for other threads.This should always be done to make static data thread safe.
+
+
+33.Know about Superclass:
+    Variables, methods and constructors declared private can be accessed only by the members of the super class.
+    Variables, methods and constructors declared protected can be accessed by any subclass of the super class.
+    Variables, methods and constructors declared public in the superclass can be accessed by any class.
+
+
+34.Differences between synchronized and volatile keyword in Java? 
+    Volatile does not acquire any lock on variable or object, but Synchronization acquires lock on method or block in which it is used.
+    Volatile variables are not cached, but variables used inside synchronized method or block are cached.
+    When volatile is used will never create deadlock in program, as volatile never obtains any kind of lock. But in case if synchronization is not done properly, we might end up creating deadlock in program.
+
+	
+35.What are the restrictions imposed on Java applets ?
+	Mostly due to security reasons, the following restrictions are imposed on Java applets:
+	    An applet cannot load libraries or define native methods.
+	    An applet cannot ordinarily read or write files on the execution host.
+	    An applet cannot read certain system properties.
+	    An applet cannot make network connections except to the host that it came from.
+	    An applet cannot start any program on the host that’s executing it.
+
+		
+36.Describe the use of ArrayBlockingQueue in concurrent API.
+       ArrayBlockingQueue is a BlockingQueue that waits to retrieve and add the content. ArrayBlockingQueue is bounded. It means we cannot increase the size of ArrayBlockingQueue once initialized. It internally uses array to create queue.
+To understand, how does ArrayBlockingQueue wait, we need to know ReetrantLock and Condition of java concurrent API.
+1. Get the ReetrantLock instance.
+2. Call the method lockInterruptibly() to get lock. It returns lock if no thread has locked otherwise becomes idle and is invoked once lock is available.
+3. Once lock is obtained, wait for getting space in ArrayBlockingQueue with the help of Condition await() method, once it gets space, insert the element.
+
+
+37.What is difference between CopyOnWriteArrayList and CopyOnWriteArraySet?
+   CopyOnWriteArrayList is thread safe and equivalent to ArrayList. CopyOnWriteArrayList makes the copy of fresh array for mutative operations like add or set.
+   CopyOnWriteArraySet internally uses CopyOnWriteArrayList. Traversal via iterator in CopyOnWriteArrayList and CopyOnWriteArraySet is fast. Iterators does not support remove operation in both.
+
+
+38.What is difference between ConcurrentHashMap and Hashtable in Java?
+    ConcurrentHashMap and Hashtable both are used in concurrent environment. More than one thread can add and read data.
+    ConcurrentHashMap and Hashtable both do not allow null as key and value.
+    ConcurrentHashMap uses the same functional specification as Hashtable.
+    But ConcurrentHashMap does not uses locking on the table while retrieval of content and gives last updated data. Hashtable uses locking for synchronization.
+    ConcurrentHashMap is faster than Hashtable and ConcurrentHashMap keeps all methods equivalent to Hashtable methods.
+    Hashtable is slow, any operation blocks whole Map. So a new operation has to wait for finish of previous one.
+
+	
+39.What is Exchanger in Java?
+    Exchanger is a synchronization point among threads. The threads at this point can pair and swap elements within pairs. With the help of SynchronousQueue, Exchanger can be viewed bidirectional.
+
+	
+40.Difference between Sorting performance of Arrays.sort() vs Collections.sort()?
+	Both methods have same algorithm the only difference is type of input to them.
+		Collections.sort() has a input as List so it does a translation of List to array and vice versa which is an additional step while sorting. So this should be used when you are trying to sort a list.
+		Arrays.sort is for arrays so the sorting is done directly on the array. So clearly it should be used when you have a array available with you and you want to sort it.
+
+
+41.String concatenation (CSV) with join() in JAVA 8:
+    SO far till java 7, we had String.split() method which can split a string based on some token passed as parameter.It returned list of string tokens as string array. But, if you want to join a string or create a CSV by concatenating string tokens using some separator between them, you have to iterate through list of Strings, or array of Strings, and then use StringBuilder or StringBuffer object to concatenate those string tokens and finally get the CSV.
+	Java 8 made the task easy.
+		Now you have String.join() method where first parameter is separator and then you can pass either multiple strings or some instance of Iterable having instances of strings as second parameter. It will return the CSV in return.
+                        public class StringJoinDemo{
+                                public static void main(String[] args){
+                                        String joined = String.join("/","usr","local","bin");
+                                        System.out.println(joined);
+                                }
+						}
+
+                        Output:
+                        usr/local/bin
+	
+	
+42.Assertion:
+	An assertion is a statement containing a boolean expression that is assumed to be true when the statement is executed.The system reports an AssertionError if expression evaluates to false. It is used for debugging purposes:
+	assert(a > 0); // throws an AssertionError if a <= 0
+		Assertions can be in two forms:
+		assert Expression1 ;
+		assert Expression1 : Expression2 ;
+
+Expression1 should always result in a boolean value. Expression2 can be anything that results in a value. The value is used to generate a String message that displays more debugging information.
+		class AssertionTest{
+		        int a ;
+		        public void func(){
+		            assert (a < 0): "a is positive" ;
+		            // Remaining code
+		        }
+		}
+In the above code, the assertion expression is true if a is negative. If a is positive, an AssertionError is thrown with the message "a is positive.
+
+
+43.Access Specifiers:
+	 Situation  	 						  public  	     protected  	 	  	  default  	  private 
+ Accessible to class from same package? 	   yes 				yes 		      		yes 	    no
+ Accessible to class from diff package?   	   yes 	 	no,unless it is subclass  	    no 		    no
+
+		Public- public classes, methods, and fields can be accessed from everywhere.
+		Protected- protected methods and fields can only be accessed within the same class to which the methods and fields belong, within its subclasses, and within classes of the same package.
+		Default(no specifier)- If you do not set access to specific level, then such a class, method, or field will be accessible from inside the same package to which the class, method, or field belongs, but not outside this package.
+		Private- private methods and fields can only be accessed within the same class to which the methods and fields belong. private methods and fields are not visible within subclasses and are not inherited by subclasses.
+	
+
+44.What is volatile keyword?
+	In general each thread has its own copy of variable, such that one thread is not concerned with the value of same variable in the other thread. But sometime this may not be the case. Consider a scenario in which the count variable is holding the number of times a method is called for a given class irrespective of any thread calling, in this case irrespective of thread access the count has to be increased. In this case the count variable is declared as volatile. The copy of volatile variable is stored in the main memory, so every time a thread access the variable even for reading purpose the local copy is updated each time from the main memory. The volatile variable also have performance issues. 
+
+
+45.Does garbage collection guarantee that a program will not run out of memory?
+	Garbage collection does not guarantee that a program will not run out of memory. It is possible for programs to use up memory resources faster than they are garbage collected. It is also possible for programs to create objects that are not subject to garbage collection.
+	
+	
+46.What Is Stack?
+	Each Java thread have a private JVM stack, created along with thread. Stack stores frames. Frames are used for storing data (Variable and Object Data as well as partial results) and to perform operations such as Dynamic linking
+Dispatch exceptions when error occurs.Return values when methods are invoked. Since the stack can't be accessed directly, it push and pop frames. It is not mandatory that the Java virtual machine stack had to be continuous.
+JVM throws StackOverflowError, if any computation inside a thread needs larger JVM stack than allocated .
+
+
+47.What Is Heap?
+	When JVM starts, heap is created. Heap is the runtime data area of the JVM. It is shared by all the threads inside the JVM. It allocates memory for all class instances and arrays.Heap storage for objects is reclaimed by garbage collector when it is not used. JVM throws OutOfMemoryError, If a computation needs more heap than what can be supplied by the automatic storage management system.
+
+
+48.What are the steps involved in Java Application Execution:
+	Compiling Java Source Files into *.class file. (Byte Code)
+	Loading class file into Java Run Time (JRE) using class loader
+	Use Bytecode verifier to check for byte code specification
+	Use Just In time Code Generator or Interpreter for byte code execution
+
+	Class loader:- is used to load all the classes required execute the application into JVM. After the class is loaded memory required for the application is determined.
+	Byte code verifier:- checks for illegal code like forges pointers, violated access rights on objects etc. in complied byte code.
+Just in time Compiler (JIT):- compiles JAVA byte code to native machine code and execute it directly on the underlying hardware.JIT compilation provides application execution speeds near to C or C++ application.
+
+
+49.String Intern:
+	According to String#intern(), intern method is supposed to return the String from the String pool if the String is found in String pool, otherwise a new string object will be added in String pool and the reference of this String is returned.
+			String name = new String("test").intern();
+	checks if any "test" is there in the stringpool, if so then the string from the pool is returned, if not, object is added to the pool and a reference to this object is returned.
+	
+	
+50.Serialization:
+	Java provides a mechanism, called object serialization where an object can be represented as a sequence of bytes that includes the object's data as well as information about the object's type and the types of data stored in the object. Serialized object has been written into a file, it can be read from the file and deserialized that is, the type information and bytes that represent the object and its data can be used to recreate the object in memory.It is mainly used to travel object's state on the network (known as marshaling).
+	The entire process is JVM independent, meaning an object can be serialized on one platform and deserialized on an entirely different platform. Serializable is a marker interface (has no mtd). Used to "mark" java classes which support a certain capability. Classes ObjectInputStream and ObjectOutputStream are high-level streams that contain the methods for serializing and deserializing an object.
+
+
+51.What is static import?
+	If we have to use any static variable or method from other class, usually we import the class and then use the method/variable with class name.
+
+		import java.lang.Math;
+
+		//inside class
+		double test = Math.PI * 5;
+We can do the same thing by importing the static method or variable only and then use it in the class as if it belongs to it.
+
+		import static java.lang.Math.PI;
+
+		//no need to refer class now
+		double test = PI * 5;
+	Use of static import can cause confusion, so it’s better to avoid it. Overuse of static import can make your program unreadable and unmaintainable. When large number of import statements are kept unused in a class, they are ignored if the corresponding class is not used.
+
+
+52.Can an interface implement or extend another interface?
+	Interfaces don’t implement another interface, they extend it. Since interfaces can't have method implementations, there is no issue of diamond problem. That’s why we have multiple inheritance in interfaces i.e an interface can extend multiple interfaces.
+	
+	
+53.What is Java Reflection API? Why it’s so important to have?
+	Java Reflection API provides ability to inspect and modify the runtime behavior of java application. We can inspect a java class, interface, enum and get their methods and field details. We can’t have any frameworks such as Spring, Hibernate or servers such as Tomcat, JBoss without Reflection API. They invoke the appropriate methods and instantiate classes through reflection API and use it a lot for other processing. Private method with default constructor can be called using the reflection API.
+		package com;
+		import java.lang.reflect.Method;
+
+		public class ReflectionTest {
+			public static void main(String[] args)throws Exception{  
+ 			    Class c = Class.forName("com.A");  // A a = new A();
+			    Object o = c.newInstance();  
+			    Method m = c.getDeclaredMethod("message", null);  //a.class.getDeclaredMethod("message");
+			    m.setAccessible(true);  								O/P:- hello java
+			    m.invoke(o, null);  													
+			}  
+		}
+		class A {  
+			  private void message(){System.out.println("hello java"); }  
+		}
+	
+	
+54.What is Classloader in Java?
+	It is the program that loads byte code program into memory when we want to access any class. We can create our own classloader by extending ClassLoader class and overriding loadClass(String name) method. 
+	There are three types of built-in Class Loaders in Java:
+Bootstrap Class Loader – It loads JDK internal classes, typically loads rt.jar and other core classes.
+Extensions Class Loader – It loads classes from the JDK extensions directory, usually $JAVA_HOME/lib/ext directory.
+System Class Loader – It loads classes from the current classpath that can be set while invoking a program using -cp or -classpath command line options.
+	Java default ClassLoader can load files from local file system that is good enough for most of the cases. But if you are expecting a class at the runtime or from FTP server or via third party web service at the time of loading the class then you have to extend the existing class loader. For example, AppletViewers load the classes from remote web server.
+	
+	
+55.Access modifiers in class:
+	Only 2 access modifiers are applicable for Top-level Classes & Interfaces. Public & Package/Default modifiers.
+	Public:- If top level class or interface within a package is declared as Public, then it is accessible both inside and outside of the package.
+	Default:- If no access modifier is specified in the declaration of the top level class or interface, then it is accessible only within package level. It is not accessible in other packages or sub packages.
+	
+	
+56.Why char[] is recommended to save passwords than String?
+	1) Since Strings are immutable in Java if you store password as plain text it will be available in memory until Garbage collector clears it and since String are used in String pool for reusability there is pretty high chance that it will be remain in memory for long duration, which pose a security threat. Since any one who has access to memory dump can find the password in clear text and that's another reason you should always used an encrypted password than plain text.
+	2) Java itself recommends using getPassword() method of JPasswordField which returns a char[] and deprecated getText() method which returns password in clear text stating security reason. Its good to follow advice from Java team and adhering to standard rather than going against it.
+	3) With String there is a risk of printing plain text but if use Array you won't print contents of array instead its memory location get printed(object) though not a real reason but still make sense.
+	
+	
+57.Try with automatic resource management:
+		public List<User> getUser(int userId) {
+		    String sql = "SELECT id, username FROM users WHERE id = ?";
+		    List<User> users = new ArrayList<>();
+		    try (Connection con = DriverManager.getConnection(myConnectionURL);
+								PreparedStatement ps = con.prepareStatement(sql);) {
+		        ps.setInt(1, userId);
+		        try (ResultSet rs = ps.executeQuery();) {
+		            while(rs.next()) {
+		                users.add(new User(rs.getInt("id"), rs.getString("name")));
+		            }
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+			return users;
+		}
+closing of the resources will be done automatically because this implementes an interface "AutoCloseable" which has a close method.
+AutoCloseable:- takes care of the resources used, closing the DB connections, closing the files and so on..
+
+
+58.How HashMap works in Java?
+	HashMap works on the principle of hashing, we have put() and get() method for storing and retrieving object from HashMap. When we pass both key and value to put() method to store on HashMap, it uses key object hashcode() method to calculate hashcode and them by applying hashing on that hashcode it identifies bucket location for storing value object. While retrieving it uses key object equals method to find out correct key value pair and return value object associated with that key. 
+	HashMap uses linked list in case of collision and object will be stored in next node of linked list. Also, HashMap stores both key and value tuple in every node of linked list in the form of Map.Entry object. 
+
+
+59.How does get(Key key) method works internally in HashMap:
+	When you call get() method with key object to retrieve corresponding value from hash based collection
+		a) Key.hashCode() method is used to find the bucket location in backing array. (Remember HashMap is backed by array in Java) Though hashcode() is not used directly, but they are passed to internal hash() function.
+		b) In backing array or better known as bucket, key and values are stored in form of a nested class called Entry. If there is only one Entry at bucket location, than value from that entry is returned. P
+	If multiple keys has same hashCode, than during put() operation collision had occurred, which means multiple Entry object stored in a bucket location. Each Entry keep track of another Entry, forming a linked list data structure there. Now, if we need to retrieve value object in this situation, following steps will be followed :
+	1) Call hashCode() method of key to find bucket location.
+	2) Traverse thought linked list, comparing keys in each entries using keys.equals() until it return true.
+So, we use equals() method of key object to find correct entry and than return value from that.
+
+
+60.How null key is handled in HashMap? 
+Since equals() and hashCode() are used to store and retrieve values, how does it work in case of the null key?
+	The null key is handled specially in HashMap, there are two separate methods for that putForNullKey(V value) and getForNullKey(). Later is offloaded version of get() to look up null keys.  Null keys always map to index 0.  This null case is split out into separate methods for the sake of performance in the two most commonly used operations (get and put), but incorporated with conditionals in others. In short, equals() and hashcode() method are not used in case of null keys in HashMap.
+
+
+61.HashMap, Linked HashMap, TreeMap:
+	HashMap:- Unordered(not even the insertion order), can contatain one null in key and multiple null values, cannout contain duplicate key(the old key will be replaced by the new). not threadsafe.
+	Linked HashMap:- same as hashmap, but follows the insertion order.
+	TreeMap:- doesnot allow null in key (throws null pointer exception) but allows in value, sorted in nature. All keys should be in the same datatype, or it will take the datatype of the 1st key and the try to convert the next thus resulting in the  classcastException is thrown.
+
+	
+62.HashSet, LinkedHashSet, TreeSet:
+	HashSet:- Unordered(not even the insertion order), can contatain one null, cannout contain duplicate.
+	Linked HashSet:- same as HashSet, but follows the insertion order.
+	TreeSet:- doesnot allow null (throws null pointer exception), sorted in nature. All values entered must in the same datatype, or it will take the datatype of the 1st key and the try to convert the next thus resulting in the  classcastException is thrown. 
+	
+	
+63.Functional Interface:
+	An interface with exactly one abstract method is called Functional Interface. @FunctionalInterface annotation is added(java 8) so that we can mark an interface as functional interface. It is not mandatory to use it, but it’s best practice to use it with functional interfaces to avoid addition of extra methods accidentally. If the interface is annotated with @FunctionalInterface annotation and we try to have more than one abstract method, it throws compiler error. The major benefit of functional interface is that we can use lambda expressions to instantiate them and avoid using bulky anonymous class implementation.
+	eg., Runnable interface with a single method run(); UncaughtExceptionHandler in thread class, java.awt.event.ActionListener; java.util.Comparator
+
+	
+64.Transient:
+	This is a keyword that we can use for a class variable, which means that we don’t want this specific variable to hold on to any data at all after the process of serialization. This is important, because there are scenarios in which we have a large amount of variables containing data, which do not need to be saved after serialization
+		Before serialization ==>   Name: Bill, age: 20, semesters: 8, comments: No comments from me!
+		After serialization ==>    Name: Bill, age: 20, semesters: 0, comments: null
+The class variables by themselves continue to exist, but they have no data associated with them, when we try to print the information by using the toString() method, we don’t get an exception, just the values that are given to these variables by Java. So an empty int is automatically assumed to have a value of zero, while a String has a value of null because it is an object.
+==================================================================================================================
+==================================================================================================================
+1. We can have multiple methods with name “main” in a single class. However if we run the class, java runtime environment will look for main method with syntax as public static void main(String args[]).
+2. We can’t have more than one public class in a single java source file. A single source file can have multiple classes that are not public.
+3. Java interface variables are by default final and static. They cannot be transient or volatile. A class can shadow the interface variable with its variable while implementing.
+4. We can’t declare a top-level class as static however an inner class can be declared as static. If inner class is declared as static, it’s called static nested class.
+5. If the finally block returns a value, it will override any exception that was thrown or any retrun statement try/catch block so it is consideres as not a good practice to use the return in the finally block.
+	finally block will be executed even after writing return statement at the end fo try block. It returns after executing finally block.
+6.  Only one NULL is allowed as a key in HashMap. HashMap does not allow multiple keys to be NULL. Nevertheless, it can have multiple NULL values.
+7. We can’t have catch or finally clause without a try statement.
+8. A try statement should have either catch block or finally block, it can have both blocks.
+9. We can’t write any code between try-catch-finally block.
+10. We can have multiple catch blocks with a single try statement but only one finally block.
+11. If two interface have same variable and the variable is not declared in implementing class, the compiler will throw "field ambiguous" error.
+12. JAVA_HOME: This environment variable point to JDK installation directory C:\Program Files\Java\jdk1.5.0.
+13. CLASSPATH: This environment variable point to jre lib paths set, e.g. C:\Program Files\Java\jdk1.5.0\jre\lib.
+14. PATH: This environment variable point to appropriate JRE bin, e.g. C:\Program Files\Java\jre1.5.0_20\bin.
+15. We cannot override static methods. Static methods are belogs to class, not belongs to object. Inheritance will not be applicable for class members.
+16. Serialization interface does not have any methods. It is a marker interface. It just tells that your class can be serializable. JVM does the work as it incours the workd serializable.
+17. By calling invalidate() method on session object, we can destory the session.
+18. Default value of a boolean is false.
+19. In Java every thread maintains its own separate stack called Runtime Stack but they share the same memory.
+20. true, false, and null might seem like keywords, but they are actually literals(reserved words). You cannot use them as identifiers in your programs.
+21. When the thread is created and started, initially it will be in the ready state.
+22. The super class or base class for Exception and Error is Throwable.
+23. We can not instantiate interfaces, so in order to make interfaces useful we must create subclasses. 
+24. Specify exception sub classes first, followed by exception super classes, or we will get compile time error.
+25. JVM is a run time environment for the compiled java class files. Main function of JVM is to convert byte code(.class file) to machine code & send appropriate commands to underlying machine for execution
+26. The FileNoFoundException is inherited from the IOException. Exception's subclasses have to be caught first.
+27. Collections.sort(list) --> to sort the list.
+28. Arrays.sort(arrays);  --> sort the array elements.
+29. 	List li = new ArrayList();
+		li.add("one"); li.add("one"); li.add("one");     
+		List li2 = new ArrayList(new HashSet(li)); //convert to set and reconver to list.
+30. hashCodes of two objects must be equal if the objects are equal, however, if two objects are unequal, the hashCode can still be equal.
+ =================================================================================================================
+=================================================================================================================
+1.What will happen if an exception is thrown from the finally block?
+	The program will exit if the exception is not catched in the finally block.
+	
+
+2.Why is it better to use hibernate than JDBC for database interaction in various Java applications?
+	Hibernate provides an OO view of the database by mapping the various classes to the database tables. This helps in thinking in terms of the OO language then in RDBMS terms and hence increases productivity.
+	
+	
+3.What are different ways to iterate over a list?
+We can iterate over a list in two different ways – using iterator and using for-each loop.
+
+		List<String> strList = new ArrayList<>();
+
+		//using for-each loop
+		for(String obj : strList){
+		    System.out.println(obj);
+		}
+
+		//using iterator
+		Iterator<String> it = strList.iterator();
+		while(it.hasNext()){
+		    String obj = it.next();
+		    System.out.println(obj);
+		}
+Using iterator is more thread-safe because it makes sure that if underlying list elements are modified, it will throw ConcurrentModificationException. Use concurrent collection classes to avoid ConcurrentModificationException while iterating over a collection, for example CopyOnWriteArrayList instead of ArrayList.
+
+
+4.Logging
+	Logging is the process of writing log messages during the execution of a program to a central place. This logging allows to report and persist error and warning messages as well as info messages (e.g., runtime statistics) so that the messages can later be retrieved and analyzed. The object which performs the logging in applications is typically just called Logger.
+	
+Logging in Java:- Java contains the Java Logging API. This logging API allows you to configure which message types are written. Individual classes can use this logger to write messages to the configured log files.
+	The java.util.logging package provides the logging capabilities via the Logger class.
+
+	
+5.Level
+	The log levels define the severity of a message. The Level class is used to define which messages should be written to the log.
+	The following lists the Log Levels in descending order:
+		SEVERE (highest)
+		WARNING
+		INFO
+		CONFIG
+		FINE
+		FINER
+		FINEST
+In addition to that we also have the levels OFF and ALL to turn the logging off or to log everything.
+	For example, the following code sets the logger to the info level, which means all messages with severe, warning and info will be logged. LOGGER.setLevel(Level.INFO); 
+
+
+6.Write any Log class used:
+	public final class SimpleLogger {
+		private final static Logger logger = Logger.getLogger(SimpleLogger.class.getName());
+
+		public static void main(String... args) {
+			SimpleLogger.doSomething();
+		}
+
+		public static void doSomething() {
+			logger.finest("this is finest");
+			logger.finer("this is finer");
+			logger.fine("this is fine");
+			logger.config("this is config");
+			logger.info("this is info");
+			logger.warning("this is a warning");
+			logger.severe("this is severe");
+			logger.log(Level.SEVERE, "Some urgent message");
+		}
+	}
+OUTPUT:::
+	May 25, 2016 3:29:19 PM com.SimpleLogger doSomething
+	INFO: this is info
+	May 25, 2016 3:29:20 PM com.SimpleLogger doSomething
+	WARNING: this is a warning
+	May 25, 2016 3:29:20 PM com.SimpleLogger doSomething
+	SEVERE: this is severe
+	May 25, 2016 3:29:20 PM com.SimpleLogger doSomething
+	SEVERE: Some urgent message
+	
+	
+7.What is difference between Comparable and Comparator interface?
+	Comparable and Comparator interfaces are used to sort collection or array of objects.
+	Comparable interface is used to provide the natural sorting of objects and we can use it to provide sorting based on single logic.
+	Comparator interface is used to provide different algorithms for sorting and we can chose the comparator we want to use to sort the given collection of objects.
+
+
+8.What is the difference between stack and heap in Java? 
+	Stack and heap are different memory areas in the JVM and they are used for different purposes. The stack is used to hold method frames and local variables while objects are always allocated memory from the heap. The stack is usually much smaller than heap memory and also didn't shared between multiple threads, but heap is shared among all threads in JVM.
+	
+	
+9.What is default capacity of ArrayList and HashMap in Java? 
+	As of Java 7 now, default capacity of ArrayList is 10 and default capacity of HashMap is 16, (it must be power of 2). Here is code snippet from ArrayList  and HashMap class :
+	// from ArrayList.java JDK 1.7
+	private static final int DEFAULT_CAPACITY = 10;  
+
+	//from HashMap.java JDK 7
+	static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
