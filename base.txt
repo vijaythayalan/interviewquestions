@@ -1,4 +1,4 @@
-Why we need to use JAVA
+*Why we need to use JAVA*
 
 1. Java is easy to learn.
 Java was designed to be easy to use and is therefore easy to write, compile, debug, and learn than other programming languages.
@@ -47,7 +47,7 @@ Java 8 was released on 18 March 2014. - The code name culture is dropped with Ja
 
 ================================================================================================================
 1. What is difference between path and classpath variables?
-	PATH is an environment variable used by operating system to locate the executables. Thatís why when we install Java or want any executable to be found by OS, we need to add the directory location in the PATH variable. 
+	PATH is an environment variable used by operating system to locate the executables. That‚Äôs why when we install Java or want any executable to be found by OS, we need to add the directory location in the PATH variable. 
 	Classpath is specific to java and used by java executables to locate class files. We can provide the classpath location while running java application and it can be a directory, ZIP files, JAR files etc.
 
 
@@ -58,11 +58,11 @@ Java 8 was released on 18 March 2014. - The code name culture is dropped with Ja
 
 3.What is final, finally and finalize in java?
 	final:(keyword)
-		final is a keyword. The variable decleared as final should be initialized only once and cannot be changed. Java classes declared as final cannot be extended. Methods declared as final	cannot be overridden. final keyword is used with Class to make sure no other class can extend it, for example String class is final and we canít extend it. We can use final keyword with methods to make sure child classes canít override it. final keyword can be used with variables to make sure that it can be assigned only once. However the state of the variable can be changed, for example we can assign a final variable to an object only once but the object variables can change later on.
+		final is a keyword. The variable decleared as final should be initialized only once and cannot be changed. Java classes declared as final cannot be extended. Methods declared as final	cannot be overridden. final keyword is used with Class to make sure no other class can extend it, for example String class is final and we can‚Äôt extend it. We can use final keyword with methods to make sure child classes can‚Äôt override it. final keyword can be used with variables to make sure that it can be assigned only once. However the state of the variable can be changed, for example we can assign a final variable to an object only once but the object variables can change later on.
 	finally: (block)
 		fianlly block is used with try-catch to put the code that you want to get executed always, even if any exception is thrown by the try-catch block. finally block is mostly used to release resources created in the try block. Putting cleanup code in a finally block is always a good practice, even when no exceptions are anticipated.
 	finalize: (method)	protected void finalize() throws Throwable { };
-		finalize() is a special method in Object class that we can override in our classes. This method getís called by garbage collector when the object is getting garbage collected. This method is usually overridden to release system resources when object is garbage collected.
+		finalize() is a special method in Object class that we can override in our classes. This method get‚Äôs called by garbage collector when the object is getting garbage collected. This method is usually overridden to release system resources when object is garbage collected.
 	
 
 4.What is the difference between fail-fast and fail-safe Iterators?
@@ -70,7 +70,7 @@ Java 8 was released on 18 March 2014. - The code name culture is dropped with Ja
 	
 
 5.What is CopyOnWriteArrayList, how it is different than ArrayList and Vector?
-	CopyOnWriteArrayList is new List implementation introduced in Java 1.5 that provides better concurrent access than Synchronized List. Better concurrency is achieved by Copying ArrayList over each write and replace with original instead of locking. CopyOnWriteArrayList doesnít throw any ConcurrentModification Exception. Its different than ArrayList because its thread-safe and ArrayList is not thread safe and its different than Vector in terms of Concurrency. This provides better Concurrency by reducing contention among readers and writers.	
+	CopyOnWriteArrayList is new List implementation introduced in Java 1.5 that provides better concurrent access than Synchronized List. Better concurrency is achieved by Copying ArrayList over each write and replace with original instead of locking. CopyOnWriteArrayList doesn‚Äôt throw any ConcurrentModification Exception. Its different than ArrayList because its thread-safe and ArrayList is not thread safe and its different than Vector in terms of Concurrency. This provides better Concurrency by reducing contention among readers and writers.	
 	
 	
 6.Explain different ways of creating a thread.
@@ -121,7 +121,7 @@ When not extending the Thread class, class object would not be treated as a thre
 			}
 			return singleInstance;
 		}
-If you donít synchronize the method which is going to return the instance then, there is a possibility of allowing multiple instances in a multi-threaded scenario.
+If you don‚Äôt synchronize the method which is going to return the instance then, there is a possibility of allowing multiple instances in a multi-threaded scenario.
 
 	public class Singleton {
 		private static Singleton singleInstance = new Singleton();	//early loading
@@ -193,7 +193,7 @@ From Java 7
 14.Diamond operator in java
 	Map<String, List<Trade>> trades = new TreeMap<String, List<Trade>> ();
 	Can the compiler infer the types by looking at the left-hand-side declaration?
-		Not unless youíre using Java 7. In 7, itís written like this:
+		Not unless you‚Äôre using Java 7. In 7, it‚Äôs written like this:
 			Map<String, List<Trade>> trades = new TreeMap <> ();
 			Instead you use the <> symbol, which is called diamond operator.
 		
@@ -255,7 +255,7 @@ From Java 7
 		
 22.UnsupportedOperationException:
 	This exception is thrown on invoked methods which are not supported by actual collection type.
-For example, if you make a read-only list list using ìCollections.unmodifiableList(list)î and then call add() or remove() method, what should happen. It should clearly throw UnsupportedOperationException
+For example, if you make a read-only list list using ‚ÄúCollections.unmodifiableList(list)‚Äù and then call add() or remove() method, what should happen. It should clearly throw UnsupportedOperationException
 
 	
 26.What are differences among throw, throws, and Throwable?
@@ -276,11 +276,11 @@ For example, if you make a read-only list list using ìCollections.unmodifiableLi
 	
 27.What is the difference between Set, List and Map Collection classes?
 	java.util.Set, java.util.List and java.util.Map are popular data structure support in Java. 	
-	Set provides uniqueness guarantee i.e.g you cannot store duplicate elements on it, but itís not ordered. 
+	Set provides uniqueness guarantee i.e.g you cannot store duplicate elements on it, but it‚Äôs not ordered. 
 	List is an ordered Collection and also allowes duplicates. 
 	Map is based on hashing and stores key and value in an Object called entry. It provides O(1) performance to get object, if you know keys, if there is no collision. 
 	Popular impelmentation of Set is HashSet, of List is ArrayList and LinkedList, and of Map are HashMap, Hashtable and ConcurrentHashMap. 
-Another key difference between Set, List and Map are that Map doesnít implement Collection interface, while other two does.
+Another key difference between Set, List and Map are that Map doesn‚Äôt implement Collection interface, while other two does.
 
 
 28.Java swing:
@@ -323,7 +323,7 @@ Another key difference between Set, List and Map are that Map doesnít implement 
 	    An applet cannot ordinarily read or write files on the execution host.
 	    An applet cannot read certain system properties.
 	    An applet cannot make network connections except to the host that it came from.
-	    An applet cannot start any program on the host thatís executing it.
+	    An applet cannot start any program on the host that‚Äôs executing it.
 
 		
 36.Describe the use of ArrayBlockingQueue in concurrent API.
@@ -455,15 +455,15 @@ We can do the same thing by importing the static method or variable only and the
 
 		//no need to refer class now
 		double test = PI * 5;
-	Use of static import can cause confusion, so itís better to avoid it. Overuse of static import can make your program unreadable and unmaintainable. When large number of import statements are kept unused in a class, they are ignored if the corresponding class is not used.
+	Use of static import can cause confusion, so it‚Äôs better to avoid it. Overuse of static import can make your program unreadable and unmaintainable. When large number of import statements are kept unused in a class, they are ignored if the corresponding class is not used.
 
 
 52.Can an interface implement or extend another interface?
-	Interfaces donít implement another interface, they extend it. Since interfaces can't have method implementations, there is no issue of diamond problem. Thatís why we have multiple inheritance in interfaces i.e an interface can extend multiple interfaces.
+	Interfaces don‚Äôt implement another interface, they extend it. Since interfaces can't have method implementations, there is no issue of diamond problem. That‚Äôs why we have multiple inheritance in interfaces i.e an interface can extend multiple interfaces.
 	
 	
-53.What is Java Reflection API? Why itís so important to have?
-	Java Reflection API provides ability to inspect and modify the runtime behavior of java application. We can inspect a java class, interface, enum and get their methods and field details. We canít have any frameworks such as Spring, Hibernate or servers such as Tomcat, JBoss without Reflection API. They invoke the appropriate methods and instantiate classes through reflection API and use it a lot for other processing. Private method with default constructor can be called using the reflection API.
+53.What is Java Reflection API? Why it‚Äôs so important to have?
+	Java Reflection API provides ability to inspect and modify the runtime behavior of java application. We can inspect a java class, interface, enum and get their methods and field details. We can‚Äôt have any frameworks such as Spring, Hibernate or servers such as Tomcat, JBoss without Reflection API. They invoke the appropriate methods and instantiate classes through reflection API and use it a lot for other processing. Private method with default constructor can be called using the reflection API.
 		package com;
 		import java.lang.reflect.Method;
 
@@ -484,9 +484,9 @@ We can do the same thing by importing the static method or variable only and the
 54.What is Classloader in Java?
 	It is the program that loads byte code program into memory when we want to access any class. We can create our own classloader by extending ClassLoader class and overriding loadClass(String name) method. 
 	There are three types of built-in Class Loaders in Java:
-Bootstrap Class Loader ñ It loads JDK internal classes, typically loads rt.jar and other core classes.
-Extensions Class Loader ñ It loads classes from the JDK extensions directory, usually $JAVA_HOME/lib/ext directory.
-System Class Loader ñ It loads classes from the current classpath that can be set while invoking a program using -cp or -classpath command line options.
+Bootstrap Class Loader ‚Äì It loads JDK internal classes, typically loads rt.jar and other core classes.
+Extensions Class Loader ‚Äì It loads classes from the JDK extensions directory, usually $JAVA_HOME/lib/ext directory.
+System Class Loader ‚Äì It loads classes from the current classpath that can be set while invoking a program using -cp or -classpath command line options.
 	Java default ClassLoader can load files from local file system that is good enough for most of the cases. But if you are expecting a class at the runtime or from FTP server or via third party web service at the time of loading the class then you have to extend the existing class loader. For example, AppletViewers load the classes from remote web server.
 	
 	
@@ -556,27 +556,27 @@ Since equals() and hashCode() are used to store and retrieve values, how does it
 	
 	
 63.Functional Interface:
-	An interface with exactly one abstract method is called Functional Interface. @FunctionalInterface annotation is added(java 8) so that we can mark an interface as functional interface. It is not mandatory to use it, but itís best practice to use it with functional interfaces to avoid addition of extra methods accidentally. If the interface is annotated with @FunctionalInterface annotation and we try to have more than one abstract method, it throws compiler error. The major benefit of functional interface is that we can use lambda expressions to instantiate them and avoid using bulky anonymous class implementation.
+	An interface with exactly one abstract method is called Functional Interface. @FunctionalInterface annotation is added(java 8) so that we can mark an interface as functional interface. It is not mandatory to use it, but it‚Äôs best practice to use it with functional interfaces to avoid addition of extra methods accidentally. If the interface is annotated with @FunctionalInterface annotation and we try to have more than one abstract method, it throws compiler error. The major benefit of functional interface is that we can use lambda expressions to instantiate them and avoid using bulky anonymous class implementation.
 	eg., Runnable interface with a single method run(); UncaughtExceptionHandler in thread class, java.awt.event.ActionListener; java.util.Comparator
 
 	
 64.Transient:
-	This is a keyword that we can use for a class variable, which means that we donít want this specific variable to hold on to any data at all after the process of serialization. This is important, because there are scenarios in which we have a large amount of variables containing data, which do not need to be saved after serialization
+	This is a keyword that we can use for a class variable, which means that we don‚Äôt want this specific variable to hold on to any data at all after the process of serialization. This is important, because there are scenarios in which we have a large amount of variables containing data, which do not need to be saved after serialization
 		Before serialization ==>   Name: Bill, age: 20, semesters: 8, comments: No comments from me!
 		After serialization ==>    Name: Bill, age: 20, semesters: 0, comments: null
-The class variables by themselves continue to exist, but they have no data associated with them, when we try to print the information by using the toString() method, we donít get an exception, just the values that are given to these variables by Java. So an empty int is automatically assumed to have a value of zero, while a String has a value of null because it is an object.
+The class variables by themselves continue to exist, but they have no data associated with them, when we try to print the information by using the toString() method, we don‚Äôt get an exception, just the values that are given to these variables by Java. So an empty int is automatically assumed to have a value of zero, while a String has a value of null because it is an object.
 ==================================================================================================================
 ==================================================================================================================
-1. We can have multiple methods with name ìmainî in a single class. However if we run the class, java runtime environment will look for main method with syntax as public static void main(String args[]).
-2. We canít have more than one public class in a single java source file. A single source file can have multiple classes that are not public.
+1. We can have multiple methods with name ‚Äúmain‚Äù in a single class. However if we run the class, java runtime environment will look for main method with syntax as public static void main(String args[]).
+2. We can‚Äôt have more than one public class in a single java source file. A single source file can have multiple classes that are not public.
 3. Java interface variables are by default final and static. They cannot be transient or volatile. A class can shadow the interface variable with its variable while implementing.
-4. We canít declare a top-level class as static however an inner class can be declared as static. If inner class is declared as static, itís called static nested class.
+4. We can‚Äôt declare a top-level class as static however an inner class can be declared as static. If inner class is declared as static, it‚Äôs called static nested class.
 5. If the finally block returns a value, it will override any exception that was thrown or any retrun statement try/catch block so it is consideres as not a good practice to use the return in the finally block.
 	finally block will be executed even after writing return statement at the end fo try block. It returns after executing finally block.
 6.  Only one NULL is allowed as a key in HashMap. HashMap does not allow multiple keys to be NULL. Nevertheless, it can have multiple NULL values.
-7. We canít have catch or finally clause without a try statement.
+7. We can‚Äôt have catch or finally clause without a try statement.
 8. A try statement should have either catch block or finally block, it can have both blocks.
-9. We canít write any code between try-catch-finally block.
+9. We can‚Äôt write any code between try-catch-finally block.
 10. We can have multiple catch blocks with a single try statement but only one finally block.
 11. If two interface have same variable and the variable is not declared in implementing class, the compiler will throw "field ambiguous" error.
 12. JAVA_HOME: This environment variable point to JDK installation directory C:\Program Files\Java\jdk1.5.0.
@@ -611,7 +611,7 @@ The class variables by themselves continue to exist, but they have no data assoc
 	
 	
 3.What are different ways to iterate over a list?
-We can iterate over a list in two different ways ñ using iterator and using for-each loop.
+We can iterate over a list in two different ways ‚Äì using iterator and using for-each loop.
 
 		List<String> strList = new ArrayList<>();
 
