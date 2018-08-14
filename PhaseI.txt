@@ -1,0 +1,36 @@
+Phase - I
+===============================
+Core Java
+Data Structure and Algorithms
+Java 7 and 8
+Micro Services
+===============================
+Database
+Design Patterns
+BuildingTool
+Web Services/RESTful services
+JMS
+===============================
+Spring
+Hibernate
+===============================
+Javascript
+JSP
+Servlet
+HTML
+CSS
+===============================
+Angular
+Node
+React
+===============================
+Android
+
+
+BubblesSort
+QuickSort
+MergeSort
+HeapSort
+InsertionSort
+TimSort
+BinarytreeSort
